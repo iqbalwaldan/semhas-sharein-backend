@@ -22,7 +22,7 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 Route::middleware('guest')->group(function(){
     // Login Route
     Route::controller(LoginController::class)->group(function(){
-        Route::post('/login', 'login');
+        Route::post('/login', 'login')->name('login');
         Route::post('/logout', 'logout');
     });
 });
