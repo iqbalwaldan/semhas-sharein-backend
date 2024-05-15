@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Password;
@@ -18,18 +19,32 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 |
 */
 
+Route::middleware('guest')->group(function(){
+    // Login Route
+    Route::controller(LoginController::class)->group(function(){
+        Route::post('/login', 'login');
+        Route::post('/logout', 'logout');
+    });
+});
+
+Route::middleware('auth')->group(function(){
+    Route::controller(LoginController::class)->group(function(){
+        Route::post('/logout', 'logout');
+    });
+    
+});
 
 Route::namespace('App\Http\Controllers')->group(function () {
     //Auth Routes
-    Route::post('/login', 'Auth\LoginController@login')
-        ->middleware('guest')
-        ->name('login');
+    // Route::post('/login', 'Auth\LoginController@login')
+    //     ->middleware('guest')
+    //     ->name('login');
     Route::post('/register', 'Auth\RegisterController@register')
         ->middleware('guest')
         ->name('register');
-    Route::post('/logout', 'Auth\LoginController@logout')
-        ->middleware('auth')
-        ->name('logout');
+    // Route::post('/logout', 'Auth\LoginController@logout')
+    //     ->middleware('auth')
+    //     ->name('logout');
 
     //Verify Email Routes
     Route::group(['prefix' => 'email-verification'], function () {
