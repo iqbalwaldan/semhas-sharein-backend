@@ -30,7 +30,9 @@ class ResetPasswordController extends Controller
 
     public function getResetToken(string $token)
     {
-        $redirectUrl = 'http::/localhost:3000';
+        // Redirect to the frontend with the token
+        // $redirectUrl = 'http::/localhost:3000';
+        $redirectUrl = env('FRONTEND_URL');
 
         return redirect()->to($redirectUrl . '/reset-password/' . $token);
     }
