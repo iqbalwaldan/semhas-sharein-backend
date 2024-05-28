@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,4 +39,8 @@ Route::namespace('App\Http\Controllers')->group(function () {
     });
 });
 
-// Route::get('redirect', [LoginController::class,'redirect'])->name('redirect');    
+// Route::get('redirect', [LoginController::class,'redirect'])->name('redirect');
+
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/register', [AuthController::class, 'register']);
+Route::get('/forgot-password', [AuthController::class, 'forgotPassword']);
