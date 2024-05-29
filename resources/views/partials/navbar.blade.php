@@ -33,7 +33,7 @@
                         Resources
                     </li>
                 </a>
-                <a href="{{ url('/register') }}">
+                <a href="{{ route('user.register') }}">
                     <li>
                         <button class="px-6 py-1 ml-10 rounded-xl text-xl font-semibold border-2 border-neutral-10">
                             {{-- <button class="px-6 py-1 ml-10 rounded-xl text-xl font-semibold border-2 border-neutral-10 style="{{ $buttonRegisterStyles }}"> --}}
@@ -41,7 +41,7 @@
                         </button>
                     </li>
                 </a>
-                <a href="{{ url('/login') }}">
+                <a href="{{ route('user.login') }}">
                     <li>
                         <button
                             class="px-6 py-2 ml-10 rounded-xl text-xl font-semibold bg-neutral-10 text-primary-base">

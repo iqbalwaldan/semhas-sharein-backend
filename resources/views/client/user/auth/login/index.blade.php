@@ -40,7 +40,7 @@
                 <h1 class="font-bold text-3xl 2xl:text-4xl text-neutral-80 mb-2 2xl:mb-4">Sign In</h1>
                 <p class="text-xs 2xl:text-base font-light text-neutral-70">Welcome back! Please enter your details</p>
                 {{-- <form action="{{ route('login') }}" method="POST"> --}}
-                <form action="/" method="POST">
+                <form action="{{ route('user.loginPost') }}" method="POST">
                     @csrf
                     <div class="flex flex-col mt-3 2xl:mt-6 w-full">
                         <div class="flex mb-1">
@@ -51,7 +51,12 @@
                             required /> --}}
 
                         {{-- <x-input-error for="email" class="mt-2" /> --}}
-                        <x-input name="email" type="email" placeholder="yout email" required autofocus />
+                        <x-input type="email" name="email" placeholder="your email" :value="old('email')" required autofocus />
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong class="text-red-500">{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="flex flex-col mt-3 2xl:mt-6 w-full">
                         <div class="flex mb-1">
@@ -62,10 +67,10 @@
                             {{-- <x-input id="password" type="password" placeholder="your password"
                             autocomplete="current-password" required /> --}}
                             <x-input name="password" type="password" placeholder="your password" required />
-                            <span class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-neutral-70"
+                            {{-- <span class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-neutral-70"
                                 onclick="togglePasswordVisibility()">
-                                {{-- <x-icons.eye-off /> --}}
-                            </span>
+                                <x-icons.eye-off />
+                            </span> --}}
                         </div>
                         {{-- <x-input-error for="password" class="mt-2" /> --}}
                     </div>
@@ -90,7 +95,7 @@
                 </form>
                 <div class="flex mx-auto mt-3 justify-center">
                     <p class="font-normal text-base text-neutral-70">Already have an account?&nbsp;</p>
-                    <a class="font-semibold text-base text-primary-base" href="/register">Sign up</a>
+                    <a class="font-semibold text-base text-primary-base" href="{{ route('user.register') }}">Sign up</a>
                 </div>
             </div>
         </div>

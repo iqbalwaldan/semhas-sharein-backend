@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('google_id')->nullable();
             $table->unsignedBigInteger('roles_subscription')->nullable();
+            $table->unsignedBigInteger('is_admin')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

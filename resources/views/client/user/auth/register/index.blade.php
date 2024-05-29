@@ -41,7 +41,7 @@
                 <p class="text-sm 2xl:text-base font-light text-neutral-70">
                     Welcome back! Please enter your details
                 </p>
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('user.registerPost') }}">
                     @csrf
                     <div class="w-full md:flex flex-row space-x-2 md:justify-between">
                         <div class="w-1/2 flex flex-col mt-3 2xl:mt-6">
@@ -56,7 +56,7 @@
                             <x-input type="text" name="first_name" placeholder="your first name" :value="old('first_name')" />
                             @error('first_name')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong class="text-red-500">{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
@@ -72,7 +72,7 @@
                             <x-input type="text" name="last_name" placeholder="your last name" :value="old('last_name')" />
                             @error('last_name')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong class="text-red-500">{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
@@ -90,7 +90,7 @@
                         <x-input type="email" name="email" placeholder="your email" :value="old('email')" required />
                         @error('email')
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                                <strong class="text-red-500">{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
@@ -116,7 +116,7 @@
                         </div>
                         @error('phone_number')
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                                <strong class="text-red-500">{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
@@ -134,7 +134,7 @@
                             <x-input type="password" name="password" placeholder="your password" required />
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong class="text-red-500">{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
@@ -164,7 +164,7 @@
                     <p class="font-normal text-xs 2xl:text-base text-neutral-70">
                         Already have an account?&nbsp;
                     </p>
-                    <a class="font-semibold text-xs 2xl:text-base text-primary-base" href="{{ route('login') }}">
+                    <a class="font-semibold text-xs 2xl:text-base text-primary-base" href="{{ route('user.login') }}">
                         Sign in
                     </a>
                 </div>

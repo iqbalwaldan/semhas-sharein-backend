@@ -1,21 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Client\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterRequest;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-// use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function indexLogin()
     {
-        return view('client.user.auth.login.index');
+        return view('client.admin.auth.login.index');
     }
 
     public function login(Request $request)
@@ -26,7 +21,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            if (auth()->user()->email_verified_at == null) {
+            if (auth()->user()->email_verified_at == null && auth()->user()->is_admin == 'admin'){
                 return back()->with('loginError', 'Please verify your email first!');
             }
             // Regenerate the session
@@ -38,34 +33,9 @@ class AuthController extends Controller
             // Save the session token in a cookie
             setcookie('tokenlogin', $sessionToken, time() + (86400 * 30), "/"); // Cookie will expire in 30 days
 
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/admin/dashboard');
         }
         return back()->with('loginError', 'Login failed!');
-    }
-
-    public function indexRegister()
-    {
-        return view('client.user.auth.register.index');
-    }
-
-    public function register(RegisterRequest $request)
-    {
-        $request->validated($request->all());
-
-        $registrationData = $request->all();
-        $registrationData['password'] = bcrypt($registrationData['password']);
-
-        $user = User::create($registrationData);
-        $authentication['token'] =  $user->createToken('auth_tokens')->plainTextToken;
-
-        event(new Registered($user)); //Sending Verification Email
-
-        return view('client.user.auth.login.index');
-    }
-
-    public function indexForgotPassword()
-    {
-        return view('client.user.auth.resetPassword.index');
     }
 
     public function logout(Request $request)
