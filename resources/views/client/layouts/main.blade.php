@@ -5,7 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {{-- Tailwind CSS --}}
     <script src="https://cdn.tailwindcss.com"></script>
+    {{-- CK Editor --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    {{-- Date Picker --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -112,6 +117,7 @@
     <div>
         @yield('container')
     </div>
+    @yield('scripts')
 </body>
 
 </html>
