@@ -27,6 +27,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             if (auth()->user()->email_verified_at == null) {
+                Auth::logout();
                 return back()->with('loginError', 'Please verify your email first!');
             }
             // Regenerate the session
