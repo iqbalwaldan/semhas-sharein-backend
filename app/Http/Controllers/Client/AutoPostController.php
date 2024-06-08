@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Str;
 use App\Models\Post;
+use App\Models\Reminder;
+use App\Models\Schedule;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,20 +48,41 @@ class AutoPostController extends Controller
                 'page_id' => $decode->id,
                 'caption' => $request->caption,
                 'status' => 'publish',
-                'remainder' => false,
             ]);
 
             // Save media to database
-            // Proses pengunggahan file
             if ($request->hasFile('file_input')) {
                 $file = $request->file('file_input');
                 $fileCopy = $file->storeAs('tmp', $file->getClientOriginalName());
 
-                // Reopen the stored file and add it to the media collection
                 $post->addMedia(storage_path('app/tmp/' . $file->getClientOriginalName()))
                     ->usingFileName($file->getClientOriginalName())
                     ->toMediaCollection('post_photo', 'media/post');
             }
+
+            // Save schedule to database
+            if ($request->has('date')) {
+                $datetime = $request->date . ' ' . $request->time;
+                $schedule = Schedule::create([
+                    'post_id' => $post->id,
+                    'post_time' => $datetime,
+                ]);
+
+                $post->update([
+                    'status' => 'scheduled',
+                ]);
+
+                // Save to reminder
+                $reminder = Reminder::create([
+                    'user_id' => auth()->id(),
+                    'name' => 'Post Reminder',
+                    'email' => auth()->user()->email,
+                    'description' => 'Post Reminder',
+                    'reminder_time' => $datetime,
+                ]);
+            }
+
+
 
             // Post to Facebook
             // $client = new Client();
