@@ -51,7 +51,8 @@
                             required /> --}}
 
                         {{-- <x-input-error for="email" class="mt-2" /> --}}
-                        <x-input type="email" name="email" placeholder="your email" :value="old('email')" required autofocus />
+                        {{-- <x-input type="email" name="email" placeholder="your email" :value="old('email')" required autofocus /> --}}
+                        <input type="email" name="email" placeholder="your email" :value="old('email')" required autofocus>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong class="text-red-500">{{ $message }}</strong>
@@ -66,7 +67,8 @@
                         <div class="relative">
                             {{-- <x-input id="password" type="password" placeholder="your password"
                             autocomplete="current-password" required /> --}}
-                            <x-input name="password" type="password" placeholder="your password" required />
+                            {{-- <x-input name="password" type="password" placeholder="your password" required /> --}}
+                            <input name="password" type="password" placeholder="your password" required>
                             {{-- <span class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-neutral-70"
                                 onclick="togglePasswordVisibility()">
                                 <x-icons.eye-off />
