@@ -24,6 +24,7 @@ class Reminder extends Model implements HasMedia
         'email',
         'description',
         'reminder_time',
+        'is_remained',
     ];
 
     public function getCreatedAtAttribute()
