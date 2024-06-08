@@ -9,6 +9,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('client.user.dashboard.index');
+        return view('client.user.dashboard.index',[
+            'title' => 'Dashboard',
+            'active' => 'dashboard'
+        ]);
     }
 }

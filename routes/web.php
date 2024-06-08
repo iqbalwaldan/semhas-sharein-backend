@@ -4,6 +4,11 @@ use App\Http\Controllers\Client\AuthController as UserAuthController;
 use App\Http\Controllers\Client\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Client\DashboardController as UserDashboardController;
 use App\Http\Controllers\Client\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Client\AutoPostController;
+use App\Http\Controllers\Client\GroupPostController;
+use App\Http\Controllers\Client\LoginMultiAccountController;
+use App\Http\Controllers\Client\ManageScheduleController;
+use App\Http\Controllers\Client\ReminderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,5 +71,16 @@ Route::middleware('auth')->group(function () {
         Route::post('/logout', [UserAuthController::class, 'logout'])->name('admin.logout');
     });
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
+    Route::get('/group-post', [GroupPostController::class, 'index'])->name('user.group-post');
+    Route::get('/auto-post', [AutoPostController::class, 'index'])->name('user.auto-post');
+    Route::post('/post', [AutoPostController::class, 'post'])->name('user.auto-post.post');
+
+
+    Route::get('/reminder', [ReminderController::class, 'index'])->name('user.reminder');
+    Route::get('/manage-schedule', [ManageScheduleController::class, 'index'])->name('user.manage-schedule');
+    Route::get('/login-multi-account', [LoginMultiAccountController::class, 'index'])->name('user.login-multi-account');
     Route::post('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
 });
+
+
+Route::get('/get-facebook-data', [AutoPostController::class, 'getFacebookData'])->name('get.facebook.data');

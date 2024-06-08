@@ -14,14 +14,13 @@ class Post extends Model implements HasMedia
 
     protected $fillable = [
         'user_id',
-        'user_fb_account_id',
-        'title',
-        'price',
-        'caption',
-        'hashtag',
-        'post_time',
+        'page_id',
+        'post_id',
+        'media_url',
         'media_id',
-        'group_id_destination',
+        'caption',
+        'status',
+        'remainder',
     ];
 
     public function getCreatedAtAttribute()

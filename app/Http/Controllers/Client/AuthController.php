@@ -59,7 +59,9 @@ class AuthController extends Controller
         $user = User::create($registrationData);
         $authentication['token'] =  $user->createToken('auth_tokens')->plainTextToken;
 
-        event(new Registered($user)); //Sending Verification Email
+        Auth::logout();
+
+        // event(new Registered($user)); //Sending Verification Email
 
         return view('client.user.auth.login.index');
     }
