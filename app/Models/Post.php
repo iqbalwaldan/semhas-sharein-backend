@@ -20,7 +20,6 @@ class Post extends Model implements HasMedia
         'media_id',
         'caption',
         'status',
-        'remainder',
     ];
 
     public function getCreatedAtAttribute()

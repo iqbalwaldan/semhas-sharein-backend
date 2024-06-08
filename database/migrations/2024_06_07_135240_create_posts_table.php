@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('media_id')->nullable();
             $table->string('caption');
             $table->string('status');
-            $table->boolean('remainder');
             $table->timestamps();
         });
     }
