@@ -64,8 +64,9 @@ return [
 
         'media/post' => [
             'driver' => 'local',
-            'root'   => public_path('media/post'),
-            'url'    => env('APP_URL') . '/media/post',
+            'root' => storage_path('app/public/media/post'),
+            'url' => env('APP_URL').'/storage/media/post',
+            'visibility' => 'public',
         ],
     ],
 
