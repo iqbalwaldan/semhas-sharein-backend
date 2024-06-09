@@ -61,7 +61,7 @@ class AuthController extends Controller
 
         Auth::logout();
 
-        // event(new Registered($user)); //Sending Verification Email
+        event(new Registered($user)); //Sending Verification Email
 
         return view('client.user.auth.login.index');
     }
