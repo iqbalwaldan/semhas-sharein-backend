@@ -82,36 +82,46 @@ class AutoPostController extends Controller
                 ]);
             }
 
-
-
-            // Post to Facebook
-            // $client = new Client();
-            // $response = $client->request('POST', 'https://graph.facebook.com/v20.0/' . $decode->id . '/feed', [
-            //     'headers' => [
-            //         'Accept' => 'application/json',
-            //         'Authorization' => 'Bearer ' . $decode->access_token,
-            //     ],
-            //     'form_params' => [
-            //         'message' => $request->caption,
-            //     ]
-            // ]);
-
-
-
-
-
-            // $response = json_decode($response->getBody(), true);
-            // if (isset($response['id'])) {
-            //     $post->update([
-            //         'post_id' => $response['id'],
-            //     ]);
-            // } else if (isset($response['post_id'])){
-            //     $post->update([
-            //         'post_id' => $response['post_id'],
-            //         'media_id' => $response['id'],
-            //     ]);
-            // }
             DB::commit();
+
+            if ($request->hasFile('file_input')) {
+                // Post Image to Facebook
+                $client = new Client();
+                $response = $client->request('POST', 'https://graph.facebook.com/v20.0/' . $decode->id . '/photos', [
+                    'headers' => [
+                        'Accept' => 'application/json',
+                        'Authorization' => 'Bearer ' . $decode->access_token,
+                    ],
+                    'form_params' => [
+                        'message' => $request->caption,
+                        'url' => $post->getFirstMediaUrl('post_photo'),
+                    ]
+                ]);
+            } else {
+                // Post Caption to Facebook
+                $client = new Client();
+                $response = $client->request('POST', 'https://graph.facebook.com/v20.0/' . $decode->id . '/feed', [
+                    'headers' => [
+                        'Accept' => 'application/json',
+                        'Authorization' => 'Bearer ' . $decode->access_token,
+                    ],
+                    'form_params' => [
+                        'message' => $request->caption,
+                    ]
+                ]);
+            }
+
+            $response = json_decode($response->getBody(), true);
+            if (isset($response['id'])) {
+                $post->update([
+                    'post_id' => $response['id'],
+                ]);
+            } else if (isset($response['post_id'])) {
+                $post->update([
+                    'post_id' => $response['post_id'],
+                    'media_id' => $response['id'],
+                ]);
+            }
         }
     }
 }

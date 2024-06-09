@@ -167,7 +167,7 @@
                 // Mendapatkan waktu sekarang
                 var now = new Date();
                 // Menambahkan 30 menit ke waktu sekarang
-                now.setMinutes(now.getMinutes() + 30);
+                now.setMinutes(now.getMinutes() + 2);
                 // Mengonversi waktu menjadi format HH:mm
                 var minTime = now.toTimeString().substring(0, 5);
                 // Mengatur nilai minimum untuk input time
