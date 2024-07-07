@@ -13,10 +13,10 @@ class FacebookAccount extends Model
 
     protected $fillable = [
         'user_id',
-        'fb_id',
-        'name',
-        'email',
-        'avatar_url',
+        'facebook_id',
+        'facebook_name',
+        // 'avatar_url',
+        'user_access_token',
     ];
 
     public function getUpdatedAtAttribute()

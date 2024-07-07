@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts');
+            $table->unsignedBigInteger('reminder_id');
+            $table->foreign('reminder_id')->references('id')->on('reminders')->onUpdate('cascade')->onDelete('cascade');
             $table->datetime('post_time');
-            $table->boolean('is_posted')->default(false);
             $table->timestamps();
         });
     }

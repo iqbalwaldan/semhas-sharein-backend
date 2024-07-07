@@ -20,7 +20,17 @@ class Post extends Model implements HasMedia
         'media_id',
         'caption',
         'status',
+        'page_token',
     ];
+    public function schedules()
+    {
+        return $this->hasOne(Schedule::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function getCreatedAtAttribute()
     {

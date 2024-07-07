@@ -13,6 +13,7 @@ class Schedule extends Model
 
     protected $fillable = [
         'post_id',
+        'reminder_id',
         'post_time',
         'is_posted',
     ];
@@ -40,14 +41,49 @@ class Schedule extends Model
         return $this->belongsTo(Post::class);
     }
 
+    public function reminder()
+    {
+        return $this->belongsTo(Reminder::class);
+    }
+
+    public static function runScheduledUpdate()
+    {
+        $now = Carbon::now();
+        // $schedules = self::where('post_time', '==', $now)
+        //     ->whereHas('post', function ($query) {
+        //         $query->where('status', 'scheduled');
+        //     })
+        //     ->get();
+
+        // foreach ($schedules as $schedule) {
+        //     $schedule->update([
+        //         'is_posted' => 1,
+        //     ]);
+        // }
+        // Schedule::where('id', 1)->update(['is_posted' => true]);
+        $datas = Schedule::whereHas('post', function ($query) {
+            $query->where('status', 'scheduled');
+        })->get();
+
+        // data post
+        $dataPost = $datas[0]->post;
+
+        // data media
+        $dataMedia = $dataPost->getFirstMediaUrl('post_photo');
+
+        dd($dataMedia);
+
+        foreach ($datas as $data) {
+            $data->update(['is_posted' => true]);
+        }
+    }
+
     public static function runScheduledPosts()
     {
         $now = Carbon::now();
-        $schedules = self::where('post_time', '<=', $now)
-            ->whereHas('post', function ($query) {
-                $query->where('status', 'scheduled');
-            })
-            ->get();
+        $schedules = Schedule::where('post_time', $now)->whereHas('post', function ($query) {
+            $query->where('status', 'scheduled');
+        })->get();
 
         foreach ($schedules as $schedule) {
             $post = $schedule->post;
@@ -76,7 +112,7 @@ class Schedule extends Model
                 ]);
             }
 
-            $schedule->delete();
+            // $schedule->delete();
         }
     }
 }

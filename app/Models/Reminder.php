@@ -24,7 +24,7 @@ class Reminder extends Model implements HasMedia
         'email',
         'description',
         'reminder_time',
-        'is_remained',
+        'is_reminder',
     ];
 
     public function getCreatedAtAttribute()
@@ -66,5 +66,15 @@ class Reminder extends Model implements HasMedia
             ->useDisk('public')
             ->singleFile()
             ->withResponsiveImages();
+    }
+
+    public function schedules()
+    {
+        return $this->hasOne(Schedule::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -17,10 +17,11 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('page_id');
             $table->string('post_id')->nullable();
-            $table->string('media_url')->nullable();
+            // $table->string('media_url')->nullable();
             $table->string('media_id')->nullable();
             $table->string('caption');
             $table->string('status');
+            $table->string('page_token');
             $table->timestamps();
         });
     }
