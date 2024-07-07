@@ -53,11 +53,13 @@
                                     *
                                 </p>
                             </div>
-                            {{-- <x-input type="text" name="first_name" placeholder="your first name" :value="old('first_name')" /> --}}
-                            <input type="text" name="first_name" placeholder="your first name" :value="old('first_name')">
+                            <input
+                                class="border border-[#CFCFCF] p-3 text-neutral-70 focus:outline-none w-full flex-grow h-11 rounded-md text-xs 2xl:text-base font-light"
+                                type="text" name="first_name" placeholder="your first name" :value="old('first_name')"
+                                required>
                             @error('first_name')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong class="text-red-500">{{ $message }}</strong>
+                                    <strong class="text-red-500 text-sm font-normal">{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
@@ -70,11 +72,13 @@
                                     *
                                 </p>
                             </div>
-                            {{-- <x-input type="text" name="last_name" placeholder="your last name" :value="old('last_name')" /> --}}
-                            <input type="text" name="last_name" placeholder="your last name" :value="old('last_name')">
+                            <input
+                                class="border border-[#CFCFCF] p-3 text-neutral-70 focus:outline-none w-full flex-grow h-11 rounded-md text-xs 2xl:text-base font-light"
+                                type="text" name="last_name" placeholder="your last name" :value="old('last_name')"
+                                required>
                             @error('last_name')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong class="text-red-500">{{ $message }}</strong>
+                                    <strong class="text-red-500 text-sm font-normal">{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
@@ -89,11 +93,12 @@
                                 *
                             </p>
                         </div>
-                        {{-- <x-input type="email" name="email" placeholder="your email" :value="old('email')" required /> --}}
-                        <input type="email" name="email" placeholder="your email" :value="old('email')" required>
+                        <input
+                            class="border border-[#CFCFCF] p-3 text-neutral-70 focus:outline-none w-full flex-grow h-11 rounded-md text-xs 2xl:text-base font-light"
+                            type="email" name="email" placeholder="your email" :value="old('email')" required>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
-                                <strong class="text-red-500">{{ $message }}</strong>
+                                <strong class="text-red-500 text-sm font-normal">{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
@@ -109,17 +114,17 @@
                         </div>
                         <div class="relative w-full flex">
                             <input
-                                class="cursor-pointer border border-r-0 border-[#CFCFCF] p-3 text-neutral-70 focus:outline-none w-14 2xl:w-20 h-10 2xl:h-12 rounded-l-md text-xs 2xl:text-base font-light"
+                                class="cursor-pointer border border-r-0 border-[#CFCFCF] p-3 text-neutral-70 focus:outline-none w-14 2xl:w-20 h-11 rounded-l-md text-xs 2xl:text-base font-light"
                                 type="text" placeholder="+62" name="country_number"
                                 value="{{ old('country_number') }}" />
                             <input
-                                class="border border-[#CFCFCF] p-3 text-neutral-70 focus:outline-none w-full flex-grow h-10 2xl:h-12 rounded-r-md text-xs 2xl:text-base font-light"
+                                class="border border-[#CFCFCF] p-3 text-neutral-70 focus:outline-none w-full flex-grow h-11 rounded-r-md text-xs 2xl:text-base font-light"
                                 type="text" name="phone_number" placeholder="your phone number"
                                 value="{{ old('phone_number') }}" />
                         </div>
                         @error('phone_number')
                             <span class="invalid-feedback" role="alert">
-                                <strong class="text-red-500">{{ $message }}</strong>
+                                <strong class="text-red-500 text-sm font-normal">{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
@@ -134,11 +139,12 @@
                             </p>
                         </div>
                         <div class="relative">
-                            {{-- <x-input type="password" name="password" placeholder="your password" required /> --}}
-                            <input type="password" name="password" placeholder="your password" required>
+                            <input
+                                class="border border-[#CFCFCF] p-3 text-neutral-70 focus:outline-none w-full flex-grow h-11 rounded-md text-xs 2xl:text-base font-light"
+                                type="password" name="password" placeholder="your password" required>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong class="text-red-500">{{ $message }}</strong>
+                                    <strong class="text-red-500 text-sm font-normal">{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
@@ -154,8 +160,9 @@
                             </p>
                         </div>
                         <div class="relative">
-                            {{-- <x-input type="password" name="password_confirmation" placeholder="your password" required /> --}}
-                            <input type="password" name="password_confirmation" placeholder="your password" required>
+                            <input
+                                class="border border-[#CFCFCF] p-3 text-neutral-70 focus:outline-none w-full flex-grow h-11 rounded-md text-xs 2xl:text-base font-light"
+                                type="password" name="password_confirmation" placeholder="your password" required>
                         </div>
                     </div>
 
