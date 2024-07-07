@@ -14,7 +14,7 @@
             </svg>
         </button>
 
-        <div class="h-full px-1 mt-5 bg-white">
+        <div class="h-full px-1 mt-5 bg-white shadow-xl">
             <a href="{{ route('user.dashboard') }}" class="flex items-center ps-2 mb-5">
                 <div
                     class="w-9 h-9 rounded-lg bg-gradient-to-b from-[#2E6AFF] to-[#4D2DED] flex items-center justify-center mr-2">
@@ -37,7 +37,7 @@
                         </label>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ route('user.group-post') }}">
                         <label
                             class="relative cursor-pointer flex items-center gap-4 text-sm font-normal text-neutral-80 duration-300 ease-in-out hover:text-primary-base false {{ $active === 'group-post' ? 'text-primary-base' : '' }}">
@@ -51,9 +51,9 @@
                             </svg>
                         </label>
                     </a>
-                </li>
+                </li> --}}
                 <li>
-                    <a href="{{ route('user.auto-post') }}">
+                    <a href="{{ route('user.auto-post.index') }}">
                         <label
                             class="relative cursor-pointer flex items-center gap-4 text-sm font-normal text-neutral-80 duration-300 ease-in-out hover:text-primary-base false {{ $active === 'auto-post' ? 'text-primary-base' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="none"
@@ -68,7 +68,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('user.reminder') }}">
+                    <a href="{{ route('user.reminder.index') }}">
                         <label
                             class="relative cursor-pointer flex items-center gap-4 text-sm font-normal text-neutral-80 duration-300 ease-in-out hover:text-primary-base false {{ $active === 'reminder' ? 'text-primary-base' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="22" fill="currentColor">
@@ -80,7 +80,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('user.manage-schedule') }}">
+                    <a href="{{ route('user.manage-schedule.index') }}">
                         <label
                             class="relative cursor-pointer flex items-center gap-4 text-sm font-normal text-neutral-80 duration-300 ease-in-out hover:text-primary-base false {{ $active === 'manage-schedule' ? 'text-primary-base' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none"
@@ -96,9 +96,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('user.login-multi-account') }}">
+                    <a href="{{ route('user.facebook-account.index') }}">
                         <label
-                            class="relative cursor-pointer flex items-center gap-4 text-sm font-normal text-neutral-80 duration-300 ease-in-out hover:text-primary-base false {{ $active === 'login-multi-account' ? 'text-primary-base' : '' }}">
+                            class="relative cursor-pointer flex items-center gap-4 text-sm font-normal text-neutral-80 duration-300 ease-in-out hover:text-primary-base false {{ $active === 'facebook-account' ? 'text-primary-base' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor">
                                 <path
                                     d="M7.252 14.59H5.754v-1.498A2.25 2.25 0 0 1 8 10.845h4.495v1.498H8a.75.75 0 0 0-.749.75v1.498Zm2.997-4.494a2.996 2.996 0 1 1 0-5.993 2.996 2.996 0 0 1 0 5.993Zm0-4.495a1.498 1.498 0 1 0 0 2.997 1.498 1.498 0 0 0 0-2.997Zm6.742 9.739a2.997 2.997 0 1 1 0-5.994 2.997 2.997 0 0 1 0 5.994Zm0-4.495a1.498 1.498 0 1 0 0 2.997 1.498 1.498 0 0 0 0-2.997Zm4.494 8.99h-1.498v-1.499a.75.75 0 0 0-.75-.749h-4.494a.75.75 0 0 0-.749.75v1.497h-1.498v-1.498a2.25 2.25 0 0 1 2.247-2.247h4.495a2.25 2.25 0 0 1 2.247 2.247v1.498Z">
@@ -117,7 +117,7 @@
     <aside id="logo-sidebar"
         class="fixed top-0 left-0 z-30 w-64 h-screen transition-transform -translate-x-full md:translate-x-0"
         aria-label="Sidebar">
-        <div class="h-full px-8 py-10 overflow-y-auto bg-white">
+        <div class="h-full px-8 py-10 overflow-y-auto bg-white shadow-xl">
             <a href="{{ route('user.dashboard') }}" class="flex items-center ps-2 mb-5">
                 <div
                     class="w-9 h-9 rounded-lg bg-gradient-to-b from-[#2E6AFF] to-[#4D2DED] flex items-center justify-center mr-2">
@@ -145,7 +145,7 @@
                         </label>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <div class="mb-5 text-xs font-medium text-neutral-70">Post Tools</div>
                     <a href="{{ route('user.group-post') }}">
                         <label
@@ -161,9 +161,11 @@
                             Group Post
                         </label>
                     </a>
-                </li>
+                </li> --}}
                 <li>
-                    <a href="{{ route('user.auto-post') }}">
+                    <div class="mb-5 text-xs font-medium text-neutral-70">Post Tools</div>
+
+                    <a href="{{ route('user.auto-post.index') }}">
                         <label
                             class="relative cursor-pointer flex items-center gap-4 text-sm font-normal text-neutral-80 duration-300 ease-in-out hover:text-primary-base false {{ $active === 'auto-post' ? 'text-primary-base' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="none"
@@ -180,7 +182,7 @@
                 </li>
                 <li>
                     <div class="mb-5 text-xs font-medium text-neutral-70">Management</div>
-                    <a href="{{ route('user.reminder') }}">
+                    <a href="{{ route('user.reminder.index') }}">
                         <label
                             class="relative cursor-pointer flex items-center gap-4 text-sm font-normal text-neutral-80 duration-300 ease-in-out hover:text-primary-base false {{ $active === 'reminder' ? 'text-primary-base' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="22"
@@ -194,7 +196,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('user.manage-schedule') }}">
+                    <a href="{{ route('user.manage-schedule.index') }}">
                         <label
                             class="relative cursor-pointer flex items-center gap-4 text-sm font-normal text-neutral-80 duration-300 ease-in-out hover:text-primary-base false {{ $active === 'manage-schedule' ? 'text-primary-base' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none"
@@ -211,9 +213,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('user.login-multi-account') }}">
+                    <a href="{{ route('user.facebook-account.index') }}">
                         <label
-                            class="relative cursor-pointer flex items-center gap-4 text-sm font-normal text-neutral-80 duration-300 ease-in-out hover:text-primary-base false {{ $active === 'login-multi-account' ? 'text-primary-base' : '' }}">
+                            class="relative cursor-pointer flex items-center gap-4 text-sm font-normal text-neutral-80 duration-300 ease-in-out hover:text-primary-base false {{ $active === 'facebook-account' ? 'text-primary-base' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                 fill="currentColor">
                                 <path
@@ -223,7 +225,7 @@
                                     d="m9.501 19.634-3.92-2.09a6.732 6.732 0 0 1-3.571-5.95V1.856h14.982V6.35h1.498V1.856A1.5 1.5 0 0 0 16.992.357H2.01A1.5 1.5 0 0 0 .512 1.856v9.738a8.226 8.226 0 0 0 4.363 7.272L9.5 21.332v-1.698Z">
                                 </path>
                             </svg>
-                            Login Multi Account
+                            Facebook Account
                         </label>
                     </a>
                 </li>
