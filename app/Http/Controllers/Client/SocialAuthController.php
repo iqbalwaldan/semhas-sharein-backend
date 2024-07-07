@@ -39,7 +39,7 @@ class SocialAuthController extends Controller
             FacebookAccountController::updateCookies();
             return redirect()->route('home')->with('success', 'Login successful!');
         } catch (Exception $e) {
-            return redirect()->route('login')->with('error', 'Error retrieving access token');
+            return redirect()->route('user.login')->with('error', 'Error retrieving access token');
         }
     }
 }
