@@ -1,14 +1,17 @@
 <?php
 
+use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\Client\AuthController as UserAuthController;
 use App\Http\Controllers\Client\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Client\DashboardController as UserDashboardController;
 use App\Http\Controllers\Client\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Client\AutoPostController;
 use App\Http\Controllers\Client\GroupPostController;
-use App\Http\Controllers\Client\LoginMultiAccountController;
+use App\Http\Controllers\Client\FacebookAccountController;
 use App\Http\Controllers\Client\ManageScheduleController;
+use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\ReminderController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,6 +65,10 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/register', [UserAuthController::class, 'register'])->name('user.registerPost');
     Route::get('/forgot-password', [UserAuthController::class, 'indexForgotPassword'])->name('user.forgot-password');
+    Route::post('/forgot-password', [UserAuthController::class, 'sendResetLink'])->name('user.reset-link-password');
+
+    Route::get('/reset-password/{token}', [UserAuthController::class, 'indexResetPassword'])->name('user.reset-password');
+    Route::post('/reset-password', [UserAuthController::class, 'resetPassword'])->name('user.update-password');
 });
 
 Route::middleware('auth')->group(function () {
@@ -71,16 +78,29 @@ Route::middleware('auth')->group(function () {
         Route::post('/logout', [UserAuthController::class, 'logout'])->name('admin.logout');
     });
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
+    Route::get('/dashboard/getFacebookData', [UserDashboardController::class, 'getFacebookData'])->name('user.dashboard.getFacebookData');
+    Route::get('/dashboard/schedules', [UserDashboardController::class, 'schedule'])->name('user.dashboard.shcedule');
+    Route::get('/dashboard/reminders', [UserDashboardController::class, 'reminder'])->name('user.dashboard.reminder');
     Route::get('/group-post', [GroupPostController::class, 'index'])->name('user.group-post');
-    Route::get('/auto-post', [AutoPostController::class, 'index'])->name('user.auto-post');
-    Route::post('/post', [AutoPostController::class, 'post'])->name('user.auto-post.post');
+    Route::resource('/auto-post', AutoPostController::class)->names('user.auto-post');
+    // Route::post('/post', [AutoPostController::class, 'post'])->name('user.auto-post.post');
 
 
-    Route::get('/reminder', [ReminderController::class, 'index'])->name('user.reminder');
-    Route::get('/manage-schedule', [ManageScheduleController::class, 'index'])->name('user.manage-schedule');
-    Route::get('/login-multi-account', [LoginMultiAccountController::class, 'index'])->name('user.login-multi-account');
+    Route::resource('/reminder', ReminderController::class)->names('user.reminder');
+    Route::resource('/profile', ProfileController::class)->names('user.profile');
+    Route::resource('/manage-schedule', ManageScheduleController::class)->names('user.manage-schedule');
+    Route::resource('/facebook-account', FacebookAccountController::class)->names('user.facebook-account');
+    Route::get('/update-cookies', [FacebookAccountController::class, 'updateCookies'])->name('user.facebook-account.updateCookies');
     Route::post('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
 });
 
+// Daftar route cronjob
+Route::get('/post-schedule', [AutoPostController::class, 'schedulePost'])->name('schedule.post');
+Route::get('/send-reminder', [ReminderController::class, 'sendReminder'])->name('reminder.send');
 
 Route::get('/get-facebook-data', [AutoPostController::class, 'getFacebookData'])->name('get.facebook.data');
+Route::get('/email-verification/success', [UserAuthController::class, 'emailVerificationSuccess'])->name('email-verification.success');
+Route::get('/email-verification/already-success', [UserAuthController::class, 'emailVerificationAlreadySuccess'])->name('email-verification.Alreadysuccess');
+Route::get('/email-verification/process', [UserAuthController::class, 'emailVerificationProcess'])->name('email-verification.process');
+Route::get('/email-verification/resend', [UserAuthController::class, 'resendEmailVerification'])->name('email-verification.resend');
+Route::get('/token', [UserDashboardController::class, 'fetchFacebookData']);
