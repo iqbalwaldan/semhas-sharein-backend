@@ -19,7 +19,8 @@ class Kernel extends ConsoleKernel
         // $schedule->exec('php artisan newsletter:send')->dailyAt('15:00')->timezone('Asia/Jakarta');
         // $schedule->exec('php artisan reminder:check')->everyMinute()->timezone('Asia/Jakarta');
         // $schedule->exec('php artisan group:post')->everyMinute()->timezone('Asia/Jakarta');
-        $schedule->command('page:post')->everyMinute()->timezone('Asia/Jakarta');
+        // $schedule->exec('php artisan page:post')->everyMinute()->timezone('Asia/Jakarta');
+        // $schedule->command('page:post')->everyMinute()->timezone('Asia/Jakarta');
     }
 
     /**

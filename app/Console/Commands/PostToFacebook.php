@@ -33,7 +33,8 @@ class PostToFacebook extends Command
      */
     public function handle()
     {
-        Schedule::runScheduledPosts();
-        return 0;
+        // Schedule::runScheduledPosts();
+        // Schedule::runScheduledUpdate();
+        // return 0;
     }
 }
