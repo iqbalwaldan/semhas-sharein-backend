@@ -2,11 +2,11 @@
 
 @section('container')
     @include('client.user.partials.sidebar')
-    <div class="px-4 ml-[60px] sm:ml-64">
+    <div class="ml-[60px] sm:ml-64">
         <x-navbar :name="auth()->user()->first_name">
             {{ $title }}
         </x-navbar>
-        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <div class="p-4 mx-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  gap-4 mb-4">
                 <div class="flex p-3 flex-col gap-5 rounded bg-gray-200 ">
                     {{-- Choose Account --}}
