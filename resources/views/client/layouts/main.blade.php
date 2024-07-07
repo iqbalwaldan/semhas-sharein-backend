@@ -5,12 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- Tailwind CSS --}}
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    {{-- CK Editor --}}
+    <!-- CK Editor -->
     <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
-    {{-- Date Picker --}}
+    <!-- Date Picker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <!-- cdn jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+
+    <!-- cdn datatables -->
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
+
+    <!-- CDN Sweetalert2  -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom CSS Sweetalert2  -->
+    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
+
+
+    <!-- FullCalendar -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>
+
+
+
+
+
+
+
+    <!-- CDN Popper JS -->
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" /> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> -->
+
     <script>
         tailwind.config = {
             theme: {
@@ -117,6 +150,15 @@
     <div>
         @yield('container')
     </div>
+    <script>
+        function getNow() {
+            // Min date time > now + 5 minutes
+            let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+            let minDatetime = (new Date(Date.now() - tzoffset + 5 * 60 * 1000)).toISOString().slice(0, -
+                8);
+            return minDatetime;
+        }
+    </script>
     @yield('scripts')
 </body>
 
