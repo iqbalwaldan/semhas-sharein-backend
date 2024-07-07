@@ -11,8 +11,11 @@ use App\Http\Controllers\Client\FacebookAccountController;
 use App\Http\Controllers\Client\ManageScheduleController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\ReminderController;
+use App\Http\Controllers\Client\SocialAuthController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,3 +107,6 @@ Route::get('/email-verification/already-success', [UserAuthController::class, 'e
 Route::get('/email-verification/process', [UserAuthController::class, 'emailVerificationProcess'])->name('email-verification.process');
 Route::get('/email-verification/resend', [UserAuthController::class, 'resendEmailVerification'])->name('email-verification.resend');
 Route::get('/token', [UserDashboardController::class, 'fetchFacebookData']);
+
+Route::get('/auth/facebook', [SocialAuthController::class, 'redirectToProvider'])->name('auth.facebook');
+Route::get('/auth/facebook/call-back', [SocialAuthController::class, 'handleProviderCallback'])->name('auth.facebook.callback');

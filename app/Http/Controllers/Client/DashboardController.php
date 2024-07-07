@@ -376,9 +376,9 @@ class DashboardController extends Controller
         }
     }
 
-    public static function addFacebookAccount(Request $request)
+    public static function addFacebookAccount($user_access_token)
     {
-        $data = $request->user_access_token;
+        $data = $user_access_token;
         $client = new Client();
         $responseAccount = $client->request('GET', 'https://graph.facebook.com/v20.0/me', [
             'headers' => [

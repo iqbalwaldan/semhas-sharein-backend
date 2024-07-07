@@ -7,6 +7,7 @@
             {{ $title }}
         </x-navbar>
         <div class="flex gap-2 justify-end pt-4 px-4 rounded-lg">
+            <a href="/auth/facebook">Add</a>
             <button type="button" id="update-cookies-button"
                 class="bg-primary-base  h-[30px]  rounded-md px-4 text-sm font-semibold text-white">
                 Update Cookies

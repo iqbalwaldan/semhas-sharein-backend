@@ -35,8 +35,8 @@ return [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_SECRET_ID'),
         'access_token' => env('FACEBOOK_GRAPH_ACCESS_TOKEN'),
-        'redirect' => 'http://localhost:3000/auth/facebook/call-back',
-        'graph_url' => 'https://graph.facebook.com/v18.0/',
+        'redirect' => 'http://localhost:8000/auth/facebook/call-back',
+        // 'graph_url' => 'https://graph.facebook.com/v18.0/',
     ],
 
     'telegram' => [
