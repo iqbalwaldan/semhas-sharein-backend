@@ -2,8 +2,8 @@
 
 @section('container')
     <div class="flex flex-col md:flex-row">
-        <div class="h-screen w-register-left mx-auto p-20 bg-[url('/assets/images/Register-bg.png')] bg-cover bg-center bg-no-repeat"
-            style="background-image: url('{{ asset('assets/images/Register-bg.png') }}');">
+        <div class="h-screen w-register-left mx-auto p-20 bg-cover bg-center bg-no-repeat"
+            style="background-image: url('{{ asset('assets/images/register-bg.png') }}');">
             <div
                 class="h-full bg-blue-500 bg-opacity-30 backdrop-blur-lg rounded-2xl border-[6px] border-[#5882C1] border-opacity-50">
                 <div class="h-full flex flex-col items-center justify-center">
