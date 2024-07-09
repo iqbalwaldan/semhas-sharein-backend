@@ -14,8 +14,12 @@ class ReminderController extends Controller
     {
         if ($request->ajax()) {
             $reminders = Reminder::where('user_id', auth()->id())->latest();
+            // dd($reminders->get());
             return DataTables::eloquent($reminders)
                 ->addIndexColumn()
+                ->editColumn('is_reminder', function ($reminder) {
+                    return $reminder->is_reminder ? 'Yes' : 'No';
+                })
                 ->addColumn('action', 'client.user.reminder.action')
                 ->toJson();
         }
@@ -58,7 +62,7 @@ class ReminderController extends Controller
 
     public function sendReminder()
     {
-        $reminders = Reminder::where('reminder_time', '<=', now())->where('is_reminder', false)->cursor();
+        $reminders = Reminder::where('reminder_time', '<=', now())->where('is_reminder', false)->get();
         foreach ($reminders as $reminder) {
             event(new ReminderEmailEvent($reminder)); //Sending Verification Email
             $reminder->update([

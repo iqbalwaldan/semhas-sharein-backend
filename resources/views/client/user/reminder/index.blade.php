@@ -203,9 +203,6 @@
                     {
                         data: 'is_reminder',
                         name: 'is_reminder',
-                        render: function(data) {
-                            return data == 1 ? 'Yes' : 'No';
-                        }
                     },
                     {
                         data: 'action',
