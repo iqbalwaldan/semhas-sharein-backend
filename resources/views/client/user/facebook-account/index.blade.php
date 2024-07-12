@@ -7,7 +7,7 @@
             {{ $title }}
         </x-navbar>
         <div class="flex gap-2 justify-end pt-4 px-4 rounded-lg">
-            <a href="/auth/facebook">Add</a>
+            {{-- <a href="/auth/facebook">Add</a> --}}
             <button type="button" id="update-cookies-button"
                 class="bg-primary-base  h-[30px]  rounded-md px-4 text-sm font-semibold text-white">
                 Update Cookies
@@ -221,107 +221,121 @@
 
             // Start Add Function
             $('#add-facebook-button').on('click', function() {
-                $('#modal-add').removeClass('hidden');
-                $('#user-access-token-add').focus();
-                $('#user-access-token-add').val('');
+                var popup = window.open('/auth/facebook', 'popup',
+                    'width=600,height=800,scrollbars=yes,resizable=yes');
 
-                var userAccessTokenValid = isValidInput($('#user-access-token-add'), $(
-                        '#user-access-token-add-error'),
-                    $('#user-access-token-add').val() == '', 'User Access Token cannot be empty');
+                // Polling to check if the popup is closed
+                var popupInterval = setInterval(function() {
+                    if (popup.closed) {
+                        clearInterval(popupInterval);
+                        // Trigger the cookie update once the popup is closed
+                        $('#table-token-facebook').DataTable().ajax.reload();
+                        $('#update-cookies-button').trigger('click');
+                    }
+                }, 500);
             });
+            // $('#add-facebook-button').on('click', function() {
+            //     $('#modal-add').removeClass('hidden');
+            //     $('#user-access-token-add').focus();
+            //     $('#user-access-token-add').val('');
 
-            $('#user-access-token-add').on('input', function() {
-                var errorMessage = $('#user-access-token-add').next('.error-message');
-                isValidInput($(this), errorMessage, $(this).val() == '',
-                    'User Access Token cannot be empty');
-            });
+            //     var userAccessTokenValid = isValidInput($('#user-access-token-add'), $(
+            //             '#user-access-token-add-error'),
+            //         $('#user-access-token-add').val() == '', 'User Access Token cannot be empty');
+            // });
 
-            // Add data using AJAX
-            $('#submit-button-add').on('click', function(e) {
-                e.preventDefault();
-                var isValid = true;
-                var storeData = {
-                    user_access_token: $('#user-access-token-add').val(),
-                    _token: '{{ csrf_token() }}', // Make sure you include CSRF token
-                    _method: 'POST' // Specify the method as POST
-                };
-                var url = '{{ route('user.facebook-account.store') }}';
+            // $('#user-access-token-add').on('input', function() {
+            //     var errorMessage = $('#user-access-token-add').next('.error-message');
+            //     isValidInput($(this), errorMessage, $(this).val() == '',
+            //         'User Access Token cannot be empty');
+            // });
 
-                var userAccessTokenValid = isValidInput($('#user-access-token-add'), $(
-                        '#user-access-token-add-error'),
-                    $('#user-access-token-add').val() == '', 'User Access Token cannot be empty');
-                isValid = isValid && userAccessTokenValid;
+            // // Add data using AJAX
+            // $('#submit-button-add').on('click', function(e) {
+            //     e.preventDefault();
+            //     var isValid = true;
+            //     var storeData = {
+            //         user_access_token: $('#user-access-token-add').val(),
+            //         _token: '{{ csrf_token() }}', // Make sure you include CSRF token
+            //         _method: 'POST' // Specify the method as POST
+            //     };
+            //     var url = '{{ route('user.facebook-account.store') }}';
 
-                if (isValid) {
-                    // Show loading spinner with SweetAlert
-                    Swal.fire({
-                        // title: 'Please wait...',
-                        // text: 'Updating cookies...',
-                        allowOutsideClick: false,
-                        allowEscapeKey: false,
-                        allowEnterKey: false,
-                        customClass: {
-                            popup: "sweet_popupImportantLoading",
-                        },
-                        didOpen: () => {
-                            Swal.showLoading();
-                        }
-                    });
-                    $.ajax({
-                        url: url,
-                        type: 'POST',
-                        data: storeData,
-                        success: function(response) {
-                            console.log(response);
-                            $('#modal-add').addClass('hidden');
-                            $('#user-access-token-add').val('');
-                            $('#table-token-facebook').DataTable().ajax.reload();
-                            Swal.fire({
-                                imageUrl: "/assets/icons/alert-circle-success.png",
-                                imageHeight: 70,
-                                imageWidth: 70,
-                                title: "Successfully Add Facebook Data",
-                                text: "You have succesfully add facebook data.",
-                                confirmButtonText: "Okey",
-                                buttonsStyling: false,
-                                customClass: {
-                                    title: "sweet_titleImportant",
-                                    htmlContainer: "sweet_textImportant",
-                                    confirmButton: "alert-btn",
-                                },
-                                width: '400px',
-                            })
-                        },
-                        complete: function() {
-                            // Close the loading alert
-                            Swal.hideLoading();
-                        },
-                        error: function(error) {
-                            console.log(error);
-                            Swal.fire({
-                                imageUrl: "/assets/icons/alert-circle-danger.png",
-                                imageHeight: 70,
-                                imageWidth: 70,
-                                title: "Failed Add Facebook Data",
-                                text: "Sorry, the facebook data failed to add.",
-                                confirmButtonText: "Okey",
-                                buttonsStyling: false,
-                                customClass: {
-                                    title: "sweet_titleImportant",
-                                    htmlContainer: "sweet_textImportant",
-                                    confirmButton: "alert-btn",
-                                },
-                                width: '400px',
-                            })
-                        }
-                    });
-                }
-            });
+            //     var userAccessTokenValid = isValidInput($('#user-access-token-add'), $(
+            //             '#user-access-token-add-error'),
+            //         $('#user-access-token-add').val() == '', 'User Access Token cannot be empty');
+            //     isValid = isValid && userAccessTokenValid;
+
+            //     if (isValid) {
+            //         // Show loading spinner with SweetAlert
+            //         Swal.fire({
+            //             // title: 'Please wait...',
+            //             // text: 'Updating cookies...',
+            //             allowOutsideClick: false,
+            //             allowEscapeKey: false,
+            //             allowEnterKey: false,
+            //             customClass: {
+            //                 popup: "sweet_popupImportantLoading",
+            //             },
+            //             didOpen: () => {
+            //                 Swal.showLoading();
+            //             }
+            //         });
+            //         $.ajax({
+            //             url: url,
+            //             type: 'POST',
+            //             data: storeData,
+            //             success: function(response) {
+            //                 console.log(response);
+            //                 $('#modal-add').addClass('hidden');
+            //                 $('#user-access-token-add').val('');
+            //                 $('#table-token-facebook').DataTable().ajax.reload();
+            //                 Swal.fire({
+            //                     imageUrl: "/assets/icons/alert-circle-success.png",
+            //                     imageHeight: 70,
+            //                     imageWidth: 70,
+            //                     title: "Successfully Add Facebook Data",
+            //                     text: "You have succesfully add facebook data.",
+            //                     confirmButtonText: "Okey",
+            //                     buttonsStyling: false,
+            //                     customClass: {
+            //                         title: "sweet_titleImportant",
+            //                         htmlContainer: "sweet_textImportant",
+            //                         confirmButton: "alert-btn",
+            //                     },
+            //                     width: '400px',
+            //                 })
+            //             },
+            //             complete: function() {
+            //                 // Close the loading alert
+            //                 Swal.hideLoading();
+            //             },
+            //             error: function(error) {
+            //                 console.log(error);
+            //                 Swal.fire({
+            //                     imageUrl: "/assets/icons/alert-circle-danger.png",
+            //                     imageHeight: 70,
+            //                     imageWidth: 70,
+            //                     title: "Failed Add Facebook Data",
+            //                     text: "Sorry, the facebook data failed to add.",
+            //                     confirmButtonText: "Okey",
+            //                     buttonsStyling: false,
+            //                     customClass: {
+            //                         title: "sweet_titleImportant",
+            //                         htmlContainer: "sweet_textImportant",
+            //                         confirmButton: "alert-btn",
+            //                     },
+            //                     width: '400px',
+            //                 })
+            //             }
+            //         });
+            //     }
+            // });
             // Close modal edit
-            $('#close-modal-add').on('click', function() {
-                $('#user-access-token-add').val('');
-                $('#modal-add').addClass('hidden');
-            });
+            // $('#close-modal-add').on('click', function() {
+            //     $('#user-access-token-add').val('');
+            //     $('#modal-add').addClass('hidden');
+            // });
             // End Add Function
 
             // Start Edit Function
