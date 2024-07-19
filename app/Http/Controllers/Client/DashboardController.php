@@ -31,11 +31,11 @@ class DashboardController extends Controller
 
         // Total Schedule
         $totalSchedule = Schedule::whereHas('post', function ($query) {
-            $query->where('user_id', auth()->id());
+            $query->where('user_id', auth()->id())->where('status', 'scheduled');
         })->count();
 
         // Total Reminder
-        $totalReminder = Reminder::where('user_id', auth()->id())->count();
+        $totalReminder = Reminder::where('user_id', auth()->id())->where('is_reminder', 0)->count();
 
         // Total Account
         $totalAccount = FacebookAccount::where('user_id', auth()->id())->count();
@@ -52,6 +52,7 @@ class DashboardController extends Controller
             FROM schedules 
             INNER JOIN posts ON posts.id = schedules.post_id 
             WHERE posts.user_id = ?
+            AND posts.status = 'scheduled'
             GROUP BY `start`
         ", [$userId]);
 
@@ -59,6 +60,7 @@ class DashboardController extends Controller
             SELECT DATE(reminders.reminder_time) as `start`, CONCAT('Total Reminder : ', COUNT(reminders.id)) as title
             FROM reminders 
             WHERE user_id = ?
+            AND is_reminder = 0
             GROUP BY `start`
         ", [$userId]);
 
