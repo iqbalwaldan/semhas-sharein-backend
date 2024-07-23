@@ -68,6 +68,9 @@
                                     class="hidden absolute right-3 top-[25px] transform -translate-y-1/2 text-green-500"><i
                                         class="fa-solid fa-circle-check"></i></span>
                             </div>
+                            @error('password')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
                         <button type="submit"
                             class="bg-primary-base w-full h-[51px] mt-4 rounded-md py-2 px-4 text-xl font-semibold text-white">

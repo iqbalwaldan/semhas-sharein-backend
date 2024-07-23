@@ -48,9 +48,7 @@
                             type="email" name="email" placeholder="your email" :value="old('email')" required
                             autofocus>
                         @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong class="text-red-500">{{ $message }}</strong>
-                            </span>
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <button type="submit"

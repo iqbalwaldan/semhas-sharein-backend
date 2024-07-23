@@ -107,8 +107,12 @@ class AuthController extends Controller
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed|min:8',
+            'password' => 'required|min:8',
         ]);
+
+        if ($request->password != $request->password_confirmation) {
+            return back()->withErrors(['password' => 'Password confirmation does not match']);
+        }
 
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
@@ -123,7 +127,7 @@ class AuthController extends Controller
 
         return $status === Password::PASSWORD_RESET
             ? redirect()->route('user.login')->with('status', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
+            : back()->withErrors(['password' => [__($status)]]);
     }
 
 
