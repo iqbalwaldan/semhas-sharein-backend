@@ -3,7 +3,7 @@
 @section('container')
     @include('client.user.partials.sidebar')
     <div class="ml-[60px] md:ml-64">
-        <x-navbar :name="auth()->user()->first_name">
+        <x-navbar :name="auth()->user()->first_name" :profilePhoto="$profilePhoto">
             {{ $title }}
         </x-navbar>
         <div class="p-4 justify-content-center">

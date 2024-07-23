@@ -3,7 +3,7 @@
 @section('container')
     @include('client.user.partials.sidebar')
     <div class="ml-[60px] sm:ml-64 bg-gray-100">
-        <x-navbar :name="auth()->user()->first_name">
+        <x-navbar :name="auth()->user()->first_name" :profilePhoto="$profilePhoto">
             {{ $title }}
         </x-navbar>
         {{-- <div class="p-4 mx-4 border-2 border-gray-200 border-dashed rounded-xl dark:border-gray-700"> --}}

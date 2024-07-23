@@ -11,9 +11,14 @@ class ProfileController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
+        $profilePhoto = $user->getFirstMediaUrl('profile') ?: '/assets/icons/profile-user.png';
+
+
         return view('client.user.profile.index', [
             'title' => 'Profile',
-            'active' => ''
+            'active' => '',
+            'profilePhoto' => $profilePhoto,
         ]);
     }
 
@@ -25,6 +30,7 @@ class ProfileController extends Controller
             'email' => 'required|email',
             'phone_number' => 'required|string',
             'password' => 'required|string',
+            // 'file_input' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // Check if old password is correct
@@ -46,6 +52,15 @@ class ProfileController extends Controller
         }
 
         $user = User::find($id);
+
+        // Save media to database
+        if ($request->hasFile('photo_profile')) {
+            if ($user->media()->first() != null) {
+                $user->media()->first()->delete();
+            }
+            $user->addMediaFromRequest('photo_profile')->toMediaCollection('profile');
+        }
+
         $user->update($data);
 
         return response()->json([

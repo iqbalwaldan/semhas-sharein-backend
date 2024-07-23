@@ -3,7 +3,7 @@
 @section('container')
     @include('client.user.partials.sidebar')
     <div class="ml-[60px] md:ml-64 h-screen bg-gray-100">
-        <x-navbar :name="auth()->user()->first_name">
+        <x-navbar :name="auth()->user()->first_name" :profilePhoto="$profilePhoto">
             {{ $title }}
         </x-navbar>
         <div class="h-[90%] p-4 rounded-lg">
@@ -197,10 +197,10 @@
 
         /* focus:outline-none focus:border-primary-base focus:ring-1 focus:ring-primary-base */
         /* .focus .ts-control {
-                                                        border-color: var(--primary-base) !important;
-                                                        outline: none !important;
-                                                        box-shadow: 0 0 0 1px var(--primary-base) !important;
-                                                    } */
+                                                            border-color: var(--primary-base) !important;
+                                                            outline: none !important;
+                                                            box-shadow: 0 0 0 1px var(--primary-base) !important;
+                                                        } */
 
         .ts-wrapper.multi .ts-control>div {
             cursor: pointer;

@@ -20,6 +20,10 @@ class FacebookAccountController extends Controller
         // $jsonData = base64_decode($base64Data);
         // $data = json_decode($jsonData, true);
         // dd($data);
+
+        $user = auth()->user();
+        $profilePhoto = $user->getFirstMediaUrl('profile') ?: '/assets/icons/profile-user.png';
+
         if ($request->ajax()) {
             $facebook = FacebookAccount::where('user_id', auth()->id())->latest();
             return DataTables::of($facebook)
@@ -30,7 +34,9 @@ class FacebookAccountController extends Controller
 
         return view('client.user.facebook-account.index', [
             'title' => 'Facebook Account',
-            'active' => 'facebook-account'
+            'active' => 'facebook-account',
+            'profilePhoto' => $profilePhoto,
+
         ]);
     }
 

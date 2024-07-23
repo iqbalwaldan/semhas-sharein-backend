@@ -24,9 +24,13 @@ class ReminderController extends Controller
                 ->toJson();
         }
 
+        $user = auth()->user();
+        $profilePhoto = $user->getFirstMediaUrl('profile') ?: '/assets/icons/profile-user.png';
+
         return view('client.user.reminder.index', [
             'title' => 'Reminder',
-            'active' => 'reminder'
+            'active' => 'reminder',
+            'profilePhoto' => $profilePhoto,
         ]);
     }
 

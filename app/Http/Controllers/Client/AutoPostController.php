@@ -20,9 +20,13 @@ class AutoPostController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
+        $profilePhoto = $user->getFirstMediaUrl('profile') ?: '/assets/icons/profile-user.png';
+
         return view('client.user.auto-post.index', [
             'title' => 'Auto Post',
             'active' => 'auto-post',
+            'profilePhoto' => $profilePhoto,
         ]);
     }
 

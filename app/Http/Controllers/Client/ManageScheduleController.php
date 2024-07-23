@@ -55,9 +55,14 @@ class ManageScheduleController extends Controller
                 ->addColumn('action', 'client.user.manage-schedule.action')
                 ->toJson();
         }
+
+        $user = auth()->user();
+        $profilePhoto = $user->getFirstMediaUrl('profile') ?: '/assets/icons/profile-user.png';
+
         return view('client.user.manage-schedule.index', [
             'title' => 'Manage Schedule',
-            'active' => 'manage-schedule'
+            'active' => 'manage-schedule',
+            'profilePhoto' => $profilePhoto,
         ]);
     }
 

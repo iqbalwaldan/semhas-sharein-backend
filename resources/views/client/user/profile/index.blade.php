@@ -3,33 +3,23 @@
 @section('container')
     @include('client.user.partials.sidebar')
     <div class="ml-[60px] md:ml-64">
-        <x-navbar :name="auth()->user()->first_name">
+        <x-navbar :name="auth()->user()->first_name" :profilePhoto="$profilePhoto">
             {{ $title }}
         </x-navbar>
-        {{-- <div class="p-4 rounded-lg"> --}}
-        {{-- <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-4"> --}}
         <div class="relative w-full h-[280px] bg-[url('/assets/images/profile-bg.png')] bg-cover bg-center bg-no-repeat">
-            {{-- <div
-                class="absolute top-4 right-6 w-8 h-7 bg-primary-base rounded-lg p-2 border border-neutral-base flex items-center justify-center">
-                <img src="/assets/icons/camera.png" />
-            </div> --}}
             <div class="absolute top-1/3 2xl:top-1/2 h-full w-full flex justify-evenly">
                 <div
-                    class="h-[420px] 2xl:h-[420px] w-[20%] bg-white rounded-2xl border border-neutral-30 flex flex-col items-center shadow-lg">
-                    <div
-                        class="relative w-[100px] h-[100px] 2xl:w-[214px] 2xl:h-[214px] rounded-full bg-[url('/assets/icons/profile-user.png')] bg-cover mt-8">
-                        <div
+                    class="h-[520px] 2xl:h-[520px] w-[20%] bg-white rounded-2xl border border-neutral-30 flex flex-col items-center shadow-lg">
+                    <div class="relative w-[100px] h-[100px] 2xl:w-[214px] 2xl:h-[214px] rounded-full mt-8"
+                        style="background-image: url('{{ $profilePhoto ?: '/assets/icons/profile-user.png' }}'); background-size: cover;">
+                        {{-- <div
                             class="absolute w-9 h-9 2xl:w-[42px] 2xl:h-[42px] -right-2 bottom-1 2xl:right-2 2xl:bottom-2 rounded-full border-[3px] border-white flex justify-center items-center bg-primary-base p-2 2xl:p-3">
                             <img src="/assets/icons/camera.png" />
-                        </div>
+                        </div> --}}
                     </div>
                     <h1 class="mt-4 text-base 2xl:text-xl font-bold text-neutral-80">
-                        {{-- {user?.first_name}&nbsp;{user?.last_name} --}}
                         {{ auth()->user()->first_name }}&nbsp;{{ auth()->user()->last_name }}
                     </h1>
-                    {{-- <p class="mt-2 text-xs 2xl:text-base font-normal text-neutral-60">
-                        Platinum Member
-                    </p> --}}
                     <p class="mt-2 text-xs 2xl:text-base font-normal text-neutral-60">
                         {{ auth()->user()->phone_number }}
                     </p>
@@ -38,7 +28,7 @@
                     </p>
                 </div>
                 <div
-                    class="h-[420px] 2xl:h-[420px] w-[70%] bg-white rounded-2xl border border-neutral-30 pt-8 px-10 flex flex-col gap-6 shadow-lg">
+                    class="h-[520px] 2xl:h-[520px] w-[70%] bg-white rounded-2xl border border-neutral-30 pt-8 px-10 flex flex-col gap-6 shadow-lg">
                     <div class="flex flex-row gap-8">
                         <div class="flex flex-col w-full">
                             <label for="first_name" class="flex mb-1">
@@ -94,19 +84,19 @@
                                 <p class="font-normal text-sm text-error-base">*</p>
                             </label>
                             <div class="relative">
-                                {{-- <div class="relative"> --}}
-                                {{-- <input id="phone_number_prefix"
-                                    class="cursor-pointer border-l border-t border-b border-[#CFCFCF] p-3 text-neutral-70 focus:outline-none w-[11%] h-12 rounded-l-md text-sm font-light"
-                                    type="text" value="+62" readOnly /> --}}
                                 <input id="phone_number"
                                     class="border border-primary-40 p-3 text-neutral-70 focus:outline-none h-12 rounded-md text-sm font-light w-full"
                                     type="text" placeholder="your phone number" />
                                 <span id="phone_number_check"
                                     class="hidden absolute right-3 top-[25px] transform -translate-y-1/2 text-green-500"><i
                                         class="fa-solid fa-circle-check"></i></span>
-                                {{-- </div> --}}
                             </div>
                         </div>
+                    </div>
+                    <div class="w-full">
+                        <label class="font-semibold text-sm text-primary-70" for="file_input">Photo Profile</label>
+                        <input type="file" id="file_input" name="file_input" aria-describedby="file_input_help"
+                            class="block mt-2 w-full text-sm text-slate-500 border border-l-0 border-primary-40 rounded-lg file:mr-4 file:py-2 file:px-4  file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-white hover:file:bg-primary-base">
                     </div>
                     <div class="flex flex-row gap-8">
                         <div class="flex flex-col w-full">
@@ -130,13 +120,13 @@
                                 <p class="font-semibold text-sm text-primary-70">
                                     New Password
                                 </p>
-                                {{-- <p class="font-normal text-sm text-error-base">*</p> --}}
                             </label>
                             <input id="new_password"
                                 class="border border-primary-40 p-3 text-neutral-70 focus:outline-none h-12 rounded-md text-sm font-light w-full focus:outline-none focus:ring-1 focus:ring-primary-base"
                                 type="text" placeholder="your new password" />
                         </div>
                     </div>
+
                     <div class="flex flex-row justify-end w-full items-center gap-6 mt-9">
                         <button id="cancel_update_button"
                             class="px-4 py-2 bg-[#EDEDED] text-neutral-base font-medium text-sm rounded-md">
@@ -151,8 +141,6 @@
             </div>
         </div>
     </div>
-    {{-- </div> --}}
-    {{-- </div> --}}
 @endsection
 
 @section('scripts')
@@ -285,25 +273,42 @@
                     .next('.error-message'), $('#password').val() == '', 'Password cannot be empty'
                 );
                 isValid = isValid && oldPasswordValid;
+                var fileInput = document.getElementById('file_input');
+
 
                 // If all inputs are valid, log 'update'
                 if (isValid) {
-                    var updatedData = {
-                        first_name: $('#first_name').val(),
-                        last_name: $('#last_name').val(),
-                        email: $('#email').val(),
-                        phone_number: $('#phone_number').val(),
-                        password: $('#password').val(),
-                        new_password: $('#new_password').val(),
-                        _token: '{{ csrf_token() }}', // Make sure you include CSRF token
-                        _method: 'PATCH' // Specify the method as PATCH
-                    };
+                    var formData = new FormData();
+                    formData.append('photo_profile', document.getElementById('file_input').files[0]);
+                    formData.append('first_name', $('#first_name').val());
+                    formData.append('last_name', $('#last_name').val());
+                    formData.append('email', $('#email').val());
+                    formData.append('phone_number', $('#phone_number').val());
+                    formData.append('password', $('#password').val());
+                    formData.append('new_password', $('#new_password').val());
+                    formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+                    formData.append('_method', 'PATCH');
                     var url = '{{ route('user.profile.update', 'defaultId') }}';
 
+                    Swal.fire({
+                        // title: 'Please wait...',
+                        // text: 'Updating cookies...',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
+                        customClass: {
+                            popup: "sweet_popupImportantLoading",
+                        },
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
                     $.ajax({
                         url: url.replace('defaultId', '{{ auth()->user()->id }}'),
                         type: 'POST',
-                        data: updatedData,
+                        data: formData,
+                        contentType: false,
+                        processData: false,
                         success: function(response) {
                             Swal.fire({
                                 imageUrl: "/assets/icons/alert-circle-success.png",
@@ -323,6 +328,10 @@
                                 if (result.isConfirmed)
                                     location.reload();
                             })
+                        },
+                        complete: function() {
+                            // Close the loading alert
+                            Swal.hideLoading();
                         },
                         error: function(error) {
                             if (error.message = "Password is incorrect") {

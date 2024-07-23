@@ -316,6 +316,9 @@ class DashboardController extends Controller
         // ];
         $pageList = $facebookCookies;
 
+        $user = auth()->user();
+        $profilePhoto = $user->getFirstMediaUrl('profile') ?: '/assets/icons/profile-user.png';
+
         return view('client.user.dashboard.index', [
             'title' => 'Dashboard',
             'active' => 'dashboard',
@@ -325,6 +328,7 @@ class DashboardController extends Controller
             'totalPage' => $totalPage,
             'calendarEvents' => $calendarEvents,
             'pageList' => $pageList,
+            'profilePhoto' => $profilePhoto,
         ]);
     }
 
