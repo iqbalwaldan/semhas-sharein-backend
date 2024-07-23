@@ -7,9 +7,9 @@
             {{ $title }}
         </x-navbar>
         <div class="relative w-full h-[280px] bg-[url('/assets/images/profile-bg.png')] bg-cover bg-center bg-no-repeat">
-            <div class="absolute top-1/3 2xl:top-1/2 h-full w-full flex justify-evenly">
+            <div class="absolute h-full top-1/3 2xl:top-1/2 h-full w-full flex justify-evenly">
                 <div
-                    class="h-[520px] 2xl:h-[520px] w-[20%] bg-white rounded-2xl border border-neutral-30 flex flex-col items-center shadow-lg">
+                    class="h-[570px] 2xl:h-[570px] w-[20%] bg-white rounded-2xl border border-neutral-30 flex flex-col items-center shadow-lg">
                     <div class="relative w-[100px] h-[100px] 2xl:w-[214px] 2xl:h-[214px] rounded-full mt-8"
                         style="background-image: url('{{ $profilePhoto ?: '/assets/icons/profile-user.png' }}'); background-size: cover;">
                         {{-- <div
@@ -28,7 +28,7 @@
                     </p>
                 </div>
                 <div
-                    class="h-[520px] 2xl:h-[520px] w-[70%] bg-white rounded-2xl border border-neutral-30 pt-8 px-10 flex flex-col gap-6 shadow-lg">
+                    class="h-[570px] 2xl:h-[570px] w-[70%] bg-white rounded-2xl border border-neutral-30 pt-8 px-10 flex flex-col gap-6 shadow-lg">
                     <div class="flex flex-row gap-8">
                         <div class="flex flex-col w-full">
                             <label for="first_name" class="flex mb-1">
