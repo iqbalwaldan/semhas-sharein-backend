@@ -24,7 +24,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         ResetPassword::createUrlUsing(function (User $user, string $token) {
-            return 'https://sharein-backend.strangled.net/reset-password/' . $token . '?email=' . $user->email;
+            return env('APP_URL') . '/reset-password/' . $token . '?email=' . $user->email;
         });
     }
 }
